@@ -5,8 +5,10 @@
 
 ```
 1. Скачать архив с Github
-2. Распаковать в Garry's mod/garrysmod/addons
-3. Запустить сервер, играть
+2. Распаковать папку TheAliumBanList-main в Garry's mod/garrysmod/addons
+3. Переименовать папку в thealium_banlist
+4. Удалить файл banned_user.cfg из неё
+5. Запустить сервер
 ```
 
 ## Использование
