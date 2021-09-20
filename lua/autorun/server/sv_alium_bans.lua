@@ -16,7 +16,7 @@ AliumBanList["Bans"] = AliumBanList["Bans"] or {}
     Configuration
 */
 AliumBanList["cfg"] = {
-    ["banListURL"] = "https://raw.githubusercontent.com/PrikolMen/the-alium-bans/main/banned_user.cfg",
+    ["banListURL"] = "https://raw.githubusercontent.com/Pika-Software/TheAliumBanList/main/banned_user.cfg",
     ["disconnectMessage"] = [[
 -------===== [ The Alium ] =====-------
 
