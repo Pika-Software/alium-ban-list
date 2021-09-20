@@ -24,7 +24,7 @@ local concommand_Add = concommand.Add
 local hook_Add = hook.Add
 
 /*
-    Configuration
+    Дружок сталкерок конфигурация этажом ниже \/
 */
 AliumBanList["cfg"] = {
     ["tag"] = "Pika Software",  // Тег для логов в консоли
@@ -35,7 +35,8 @@ AliumBanList["cfg"] = {
         ["msgColor"] = Color(224,182,42),   // Цвет сообщения
         ["nickColor"] = Color(18, 184, 206),    // Цвет ника
     },
-    // Сообщение которое увидит отключённый игрок //
+
+    // Сообщение которое увидит отключённый игрок
     ["disconnectMessage"] = [[
         -------===== [ The Alium ] =====-------
         
@@ -47,7 +48,8 @@ AliumBanList["cfg"] = {
 }
 
 function AliumBanList:Log(...)
-    MsgC(AliumBanList["cfg"]["colors"]["tagColor"], "["..AliumBanList["cfg"]["tag"].."] ", AliumBanList["cfg"]["colors"]["msgColor"], ..., "\n")
+    local cfg = AliumBanList["cfg"]
+    MsgC(cfg["colors"]["tagColor"], "["..cfg["tag"].."] ", cfg["colors"]["msgColor"], ..., "\n")
 end
 
 function AliumBanList:Get()
@@ -60,7 +62,6 @@ function AliumBanList:Get()
                 ["accept-encoding"] = "gzip, deflate",
                 ["accept-language"] = "en",
             },
-
             ["success"] = function(code, body)
                 if code == 200 and body != "" then
                     AliumBanList["Bans"] = {}
@@ -88,12 +89,13 @@ hook_Add("InitPostEntity", "AliumBanList:GetList", function()
 end)
 
 hook_Add("CheckPassword", "AliumBanList:CheckList", function(steamid64, ip, svPass, clPass, nick)
+    local cfg = AliumBanList["cfg"]
     if (AliumBanList["Bans"][steamid64] == true) then
-        if (AliumBanList["cfg"]["printDisconnect"] == true) then
-            MsgC(AliumBanList["cfg"]["colors"]["tagColor"], "["..AliumBanList["cfg"]["tag"].."] ", AliumBanList["cfg"]["colors"]["msgColor"], "Игрок, ", AliumBanList["cfg"]["colors"]["nickColor"], nick, " ("..toSteamID(steamid64)..")", ", был заблокирован при попытке зайти на сервер!", "\n")
+        if (cfg["printDisconnect"] == true) then
+            MsgC(cfg["colors"]["tagColor"], "["..cfg["tag"].."] ", cfg["colors"]["msgColor"], "Игрок, ", cfg["colors"]["nickColor"], nick, " ("..toSteamID(steamid64)..")", ", был заблокирован при попытке зайти на сервер!", "\n")
         end
 
-        return false, AliumBanList["cfg"]["disconnectMessage"]
+        return false, cfg["disconnectMessage"]
     end
 end)
 
@@ -102,9 +104,10 @@ concommand_Add("alium_bans_update", function(ply)
         if ply:IsSuperAdmin() or ply:IsListenServerHost() then
             AliumBanList:Get()
         else
-            local col1 = AliumBanList["cfg"]["colors"]["tagColor"]
-            local col2 = AliumBanList["cfg"]["colors"]["msgColor"]
-            ply:SendLua('MsgC(Color('..col1["r"]..', '..col1["g"]..', '..col1["b"]..'), "['..AliumBanList["cfg"]["tag"]..'] ", Color('..col2["r"]..', '..col2["g"]..', '..col2["b"]..'), "У вас недостаточно прав для выполнения данного действия!", "\n")')
+            local cfg = AliumBanList["cfg"]
+            local col1 = cfg["colors"]["tagColor"]
+            local col2 = cfg["colors"]["msgColor"]
+            ply:SendLua('MsgC(Color('..col1["r"]..', '..col1["g"]..', '..col1["b"]..'), "['..cfg["tag"]..'] ", Color('..col2["r"]..', '..col2["g"]..', '..col2["b"]..'), "У вас недостаточно прав для выполнения данного действия!", "\n")')
         end
     else
         AliumBanList:Get()
