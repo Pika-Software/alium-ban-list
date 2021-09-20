@@ -20,6 +20,8 @@ local stSub = string.sub
 local stFind = string.find
 local stGsub = string.gsub
 local stGmatch = string.gmatch
+local concommand_Add = concommand.Add
+local hook_Add = hook.Add
 
 /*
     Configuration
@@ -80,11 +82,11 @@ function AliumBanList:Get()
     end
 end
 
-hook.Add("InitPostEntity", "AliumBanList:GetList", function()
+hook_Add("InitPostEntity", "AliumBanList:GetList", function()
     AliumBanList:Get()
 end)
 
-hook.Add("CheckPassword", "AliumBanList:CheckList", function(steamid64, ip, svPass, clPass, nick)
+hook_Add("CheckPassword", "AliumBanList:CheckList", function(steamid64, ip, svPass, clPass, nick)
     if (AliumBanList["Bans"][steamid64] == true) then
         if (AliumBanList["cfg"]["printDisconnect"] == true) then
             MsgC(AliumBanList["cfg"]["colors"]["tagColor"], "["..AliumBanList["cfg"]["tag"].."] ", AliumBanList["cfg"]["colors"]["msgColor"], "Игрок, ", AliumBanList["cfg"]["colors"]["nickColor"], nick, " ("..toSteamID(steamid64)..")", ", был заблокирован при попытке зайти на сервер!", "\n")
@@ -94,14 +96,14 @@ hook.Add("CheckPassword", "AliumBanList:CheckList", function(steamid64, ip, svPa
     end
 end)
 
-concommand.Add("alium_bans_update", function(ply)
+concommand_Add("alium_bans_update", function(ply)
     if IsValid(ply) then
         if ply:IsSuperAdmin() or ply:IsListenServerHost() then
             AliumBanList:Get()
         else
             local col1 = AliumBanList["cfg"]["colors"]["tagColor"]
             local col2 = AliumBanList["cfg"]["colors"]["msgColor"]
-            ply:SendLua('MsgC(Color('..col["r"]..', '..col["g"]..', '..col["b"]..'), "['..AliumBanList["cfg"]["tag"]..'] ", Color('..col2["r"]..', '..col2["g"]..', '..col2["b"]..'), "У вас недостаточно прав для выполнения данного действия!", "\n")')
+            ply:SendLua('MsgC(Color('..col1["r"]..', '..col1["g"]..', '..col1["b"]..'), "['..AliumBanList["cfg"]["tag"]..'] ", Color('..col2["r"]..', '..col2["g"]..', '..col2["b"]..'), "У вас недостаточно прав для выполнения данного действия!", "\n")')
         end
     else
         AliumBanList:Get()
