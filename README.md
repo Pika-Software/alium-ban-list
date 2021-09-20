@@ -4,9 +4,11 @@
 ## Установка
 
 ```
-1. Скачать
-2. Распаковать в Garry's mod/garrysmod/addons
-3. Запустить сервер, играть
+1. Скачать архив с Github
+2. Распаковать папку TheAliumBanList-main в Garry's mod/garrysmod/addons
+3. Переименовать папку в alium_banlist
+4. Удалить файл banned_user.cfg из папки alium_banlist
+5. Запустить сервер
 ```
 
 ## Использование
