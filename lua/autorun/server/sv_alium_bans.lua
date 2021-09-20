@@ -27,22 +27,23 @@ local hook_Add = hook.Add
     Configuration
 */
 AliumBanList["cfg"] = {
-    ["banListURL"] = "https://raw.githubusercontent.com/Pika-Software/TheAliumBanList/main/banned_user.cfg",
-    ["printDisconnect"] = true,
-    ["disconnectMessage"] = [[
--------===== [ The Alium ] =====-------
-
-Доступ к этому серверу для вас ограничен!
-Дополнительная информация в группе Steam:
-
-https://steamcommunity.com/groups/thealium
-]],
-    ["tag"] = "Pika Software",
+    ["tag"] = "Pika Software",  // Тег для логов в консоли
+    ["printDisconnect"] = true, // Выводить информацию о блокировке игрока в консоль сервера
+    ["banListURL"] = "https://raw.githubusercontent.com/Pika-Software/TheAliumBanList/main/banned_user.cfg",    // Базовая ссылка на raw с банами
     ["colors"] = {
-        ["tagColor"] = Color(0, 103, 221),
-        ["msgColor"] = Color(224,182,42),
-        ["nickColor"] = Color(18, 184, 206),
-    }
+        ["tagColor"] = Color(0, 103, 221),  // Цвет тега
+        ["msgColor"] = Color(224,182,42),   // Цвет сообщения
+        ["nickColor"] = Color(18, 184, 206),    // Цвет ника
+    },
+    // Сообщение которое увидит отключённый игрок //
+    ["disconnectMessage"] = [[
+        -------===== [ The Alium ] =====-------
+        
+        Доступ к этому серверу для вас ограничен!
+        Дополнительная информация в группе Steam:
+        
+        https://steamcommunity.com/groups/thealium
+    ]],
 }
 
 function AliumBanList:Log(...)
