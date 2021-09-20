@@ -1,5 +1,5 @@
 # TheAliumBanList
-Единая система банов для Garry's Mod сообщества The Alium
+Единая система банов для Garry's Mod, сообщества The Alium
 
 ## Установка
 
