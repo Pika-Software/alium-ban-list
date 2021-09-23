@@ -85,7 +85,10 @@ function AliumBanList:Get()
 end
 
 hook_Add("InitPostEntity", "AliumBanList:GetList", function()
-    AliumBanList:Get()
+    AliumBanList:Log("Ожидаем загрузки HTTP...")
+    timer.Simple(30, function()
+        AliumBanList:Get()
+    end)
 end)
 
 hook_Add("CheckPassword", "AliumBanList:CheckList", function(steamid64, ip, svPass, clPass, nick)
