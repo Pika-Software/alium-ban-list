@@ -84,13 +84,6 @@ function AliumBanList:Get()
     end
 end
 
-hook_Add("InitPostEntity", "AliumBanList:GetList", function()
-    AliumBanList:Log("Ожидаем загрузки HTTP...")
-    timer.Simple(30, function()
-        AliumBanList:Get()
-    end)
-end)
-
 hook_Add("CheckPassword", "AliumBanList:CheckList", function(steamid64, ip, svPass, clPass, nick)
     local cfg = AliumBanList["cfg"]
     if (AliumBanList["Bans"][steamid64] == true) then
@@ -115,4 +108,9 @@ concommand_Add("alium_bans_update", function(ply)
     else
         AliumBanList:Get()
     end
+end)
+
+timer.Simple(0, function()
+    AliumBanList:Log("Загрузка банов...")
+    AliumBanList:Get()
 end)
