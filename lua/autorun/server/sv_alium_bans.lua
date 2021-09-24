@@ -86,7 +86,7 @@ end
 
 hook_Add("InitPostEntity", "AliumBanList:GetList", function()
     AliumBanList:Log("Ожидаем загрузки HTTP...")
-    timer.Simple(30, function()
+    timer.Simple(0, function()
         AliumBanList:Get()
     end)
 end)
