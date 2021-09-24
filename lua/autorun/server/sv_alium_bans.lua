@@ -1,11 +1,11 @@
-/*
+--[[
   _____  _              ___   _  _                    ______                 _      _       _   
  |_   _|| |            / _ \ | |(_)                   | ___ \               | |    (_)     | |  
    | |  | |__    ___  / /_\ \| | _  _   _  _ __ ___   | |_/ /  __ _  _ __   | |     _  ___ | |_ 
    | |  | '_ \  / _ \ |  _  || || || | | || '_ ` _ \  | ___ \ / _` || '_ \  | |    | |/ __|| __|
    | |  | | | ||  __/ | | | || || || |_| || | | | | | | |_/ /| (_| || | | | | |____| |\__ \| |_ 
    \_/  |_| |_| \___| \_| |_/|_||_| \__,_||_| |_| |_| \____/  \__,_||_| |_| \_____/|_||___/ \__|                                                                                                                                                                                                                                                                                                                   
-*/                                                                                 
+--]]                                                                               
 
 if game.SinglePlayer() then return end -- В сингл плеере оно нам и нахуй не нужно)
 
@@ -23,20 +23,20 @@ local stGmatch = string.gmatch
 local concommand_Add = concommand.Add
 local hook_Add = hook.Add
 
-/*
+--[[
     Дружок сталкерок конфигурация этажом ниже \/
-*/
+--]]
 AliumBanList["cfg"] = {
-    ["tag"] = "Pika Software",  // Тег для логов в консоли
-    ["printDisconnect"] = true, // Выводить информацию о блокировке игрока в консоль сервера
-    ["banListURL"] = "https://raw.githubusercontent.com/Pika-Software/TheAliumBanList/main/banned_user.cfg",    // Базовая ссылка на raw с банами
+    ["tag"] = "Pika Software",  -- Тег для логов в консоли
+    ["printDisconnect"] = true, -- Выводить информацию о блокировке игрока в консоль сервера
+    ["banListURL"] = "https://raw.githubusercontent.com/Pika-Software/TheAliumBanList/main/banned_user.cfg",    -- Базовая ссылка на raw с банами
     ["colors"] = {
-        ["tagColor"] = Color(0, 103, 221),  // Цвет тега
-        ["msgColor"] = Color(224,182,42),   // Цвет сообщения
-        ["nickColor"] = Color(18, 184, 206),    // Цвет ника
+        ["tagColor"] = Color(0, 103, 221),  -- Цвет тега
+        ["msgColor"] = Color(224,182,42),   -- Цвет сообщения
+        ["nickColor"] = Color(18, 184, 206),    -- Цвет ника
     },
 
-    // Сообщение которое увидит отключённый игрок
+    -- Сообщение которое увидит отключённый игрок
     ["disconnectMessage"] = [[
         -------===== [ The Alium ] =====-------
         
