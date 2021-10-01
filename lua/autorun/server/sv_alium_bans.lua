@@ -71,13 +71,13 @@ function AliumBanList:Get()
                     for line in stGmatch(body,"(.-)\n") do
                         line = stGsub(line, "\r","")
                         local st = stFind(line, "STEAM_0:", 0)
-                        if st != nil then
+                        if st then
                             AliumBanList["Bans"][toSteamID64(stSub(line, st, #line))] = true
                         end
                     end
                 end
             end,
-        }) != nil then
+        }) then
             self:Log("Списко банов от сообщества 'The Alium' успешно получен!")
         else
             self:Log("Возникла ошибка при получении списка банов!")
@@ -96,8 +96,8 @@ end)
 
 hook_Add("CheckPassword", "AliumBanList:CheckList", function(steamid64, ip, svPass, clPass, nick)
     local cfg = AliumBanList["cfg"]
-    if (AliumBanList["Bans"][steamid64] == true) then
-        if (cfg["printDisconnect"] == true) then
+    if (AliumBanList["Bans"][steamid64]) then
+        if (cfg["printDisconnect"]) then
             MsgC(cfg["colors"]["tagColor"], "["..cfg["tag"].."] ", cfg["colors"]["msgColor"], "Игрок, ", cfg["colors"]["nickColor"], nick, " ("..toSteamID(steamid64)..")", ", был заблокирован при попытке зайти на сервер!", "\n")
         end
 
