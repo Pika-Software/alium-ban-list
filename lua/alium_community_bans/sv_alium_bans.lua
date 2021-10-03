@@ -1,4 +1,3 @@
-local steamworks_RequestPlayerInfo = steamworks.RequestPlayerInfo
 local util_AddNetworkString = util.AddNetworkString
 local net_WriteString = net.WriteString
 local concommand_Add = concommand.Add
@@ -81,32 +80,5 @@ concommand_Add("alium_bans_update", function(ply)
        end
     else
         AliumBanList:Get()
-    end
-end)
-
-function AliumBanList:GetNames()
-    if (AliumBanList["Bans"] == nil) then return end
-
-    local num = 1
-    for steamid64, bool in pairs(self["Bans"]) do
-        timer_Simple(0.25*num, function()
-            steamworks_RequestPlayerInfo(steamid64, function(name)
-                self:Log(steamid64.." ("..steamid64..")")
-            end)
-        end)
-
-        num = num + 1
-    end
-end
-
-concommand_Add("alium_bans_get", function(ply)
-    if IsValid(ply) then
-        if ply:IsListenServerHost() then
-            AliumBanList:GetNames()
-        else
-            AliumBanList:Notify(ply, "У вас недостаточно прав для выполнения данного действия!")
-        end
-    else
-        AliumBanList:GetNames()
     end
 end)
