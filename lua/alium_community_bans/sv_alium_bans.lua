@@ -27,8 +27,6 @@ function AliumBanList:Notify(ply, msg)
 end
 
 // Bans
-AliumBanList["Bans"] = AliumBanList["Bans"] or {}
-
 function AliumBanList:Get()
     if (HTTP({
         ["url"] = self["cfg"]["banListURL"],
@@ -61,6 +59,8 @@ timer_Simple(0, function()
 end)
 
 hook_Add("CheckPassword", "AliumBanList:CheckList", function(steamid64, ip, svPass, clPass, nick)
+    if (AliumBanList["Bans"] == nil) then return end
+
     local cfg = AliumBanList["cfg"]
     if (AliumBanList["Bans"][steamid64] == true) then
         if (cfg["printDisconnect"] == true) then
@@ -85,6 +85,8 @@ concommand_Add("alium_bans_update", function(ply)
 end)
 
 function AliumBanList:GetNames()
+    if (AliumBanList["Bans"] == nil) then return end
+
     local num = 1
     for steamid64, bool in pairs(self["Bans"]) do
         timer_Simple(0.25*num, function()
