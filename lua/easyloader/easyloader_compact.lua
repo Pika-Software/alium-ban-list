@@ -1,20 +1,18 @@
+--  EasyLoader Compact by PrikolMen#3372
 if EasyLoader then return end
 EasyLoader = {}
 
-// Gmod Libs Preload
+// Preload
+local string_EndsWith = string.EndsWith
 local AddCSLuaFile = AddCSLuaFile
-local MsgC = MsgC
 local string_lower = string.lower
 local string_Left = string.Left
-local include = include
 local file_Find = file.Find
+local include = include
 local ipairs = ipairs
-local string_EndsWith = string.EndsWith
+local Color = Color
+local MsgC = MsgC
 //
-
-/*
-    Easy Lua Loader Compact by PrikolMen#3372
-*/
 
 function EasyLoader:Log(tag, fl)
     MsgC(Color(40, 192, 252), "["..(tag or "ESL").."] ", Color(255, 194, 61), tag and (fl..": OK") or ("SV INCLUDE: "..fl), "\n")
