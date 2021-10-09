@@ -39,7 +39,7 @@ function AliumBanList:Get()
             end
         end,
     }) != nil) then
-        self:Log("Списко банов от сообщества 'The Alium' успешно получен!")
+        self:Log("Список банов от сообщества 'The Alium' успешно получен!")
     else
         self:Log("Возникла ошибка при получении списка банов!")
     end
