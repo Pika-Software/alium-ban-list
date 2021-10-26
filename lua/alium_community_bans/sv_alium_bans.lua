@@ -10,7 +10,6 @@ local MsgC = MsgC
 
 // Net
 util.AddNetworkString("AliumBansNet")
-
 function AliumBanList:Notify(ply, msg)
     net.Start("AliumBansNet")
         net.WriteString(msg)
@@ -22,17 +21,14 @@ function AliumBanList:Get()
     if (HTTP({
         ["url"] = self["cfg"]["banListURL"],
         ["method"] = "GET",
-        ["headers"] = {
-            ["accept-encoding"] = "gzip, deflate",
-            ["accept-language"] = "en",
-        },
+        ["headers"] = {},
         ["success"] = function(code, body)
-            if code == 200 and body != "" then
+            if (code == 200) and (body != "") then
                 self["Bans"] = {}
                 for line in stGmatch(body,"(.-)\n") do
                     line = stGsub(line, "\r","")
                     local st = stFind(line, "STEAM_0:", 0)
-                    if st != nil then
+                    if (st != nil) then
                         self["Bans"][toSteamID64(stSub(line, st, #line))] = true
                     end
                 end
