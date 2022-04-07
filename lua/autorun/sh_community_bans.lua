@@ -239,7 +239,7 @@ if (SERVER) then
 
             local util_SteamIDTo64 = util.SteamIDTo64
             local function load( name )
-                local filename = (name or "community_bans.txt") .. ".txt"
+                local filename = (name or "community_bans") .. ".txt"
                 if file.Exists( filename, "DATA" ) then
                     CommunityBans.List = {}
 
