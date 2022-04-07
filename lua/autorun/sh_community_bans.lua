@@ -41,7 +41,7 @@ CommunityBans.Reason = [[
 
 CommunityBans.SilentMode = false
 CommunityBans.ConsoleLogs = false
-CommunityBans.BaseURL = "https://raw.githubusercontent.com/Pika-Software/AliumCommunityBans/main/banned_user.cfg"
+CommunityBans.BaseURL = "https://raw.githubusercontent.com/Pika-Software/gmod_community_bans/main/banned_user.cfg"
 
 --[[----------------------------------------
                 Don't touch!
