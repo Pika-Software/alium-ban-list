@@ -107,7 +107,7 @@ if (SERVER) then
 
             for str in body:gmatch( "(.-)\n" ) do
                 local line = str:gsub( "\r", "" )
-                local start = line:find( "STEAM_0:", 0 )
+                local start = line:find( "STEAM_", 0 )
                 if (start == nil) then continue end
                 if (start == "") then continue end
 
@@ -185,6 +185,7 @@ if (SERVER) then
         do
 
             local function clear()
+                CommunityBans:Log( "List successfully cleared!" )
                 if (CommunityBans.List == nil) then return end
                 CommunityBans.List = nil
             end
@@ -220,7 +221,6 @@ if (SERVER) then
                     file.Append( filename, "banid 0 " .. util_SteamIDFrom64( steamid64 ) .. "\n" )
                 end
 
-                CommunityBans:Log( "File with ban list saved: garrysmod/data/" .. filename )
                 return filename
             end
 
@@ -232,7 +232,7 @@ if (SERVER) then
                         CommunityBans:Notify( ply, "You do not have rights to perform this action!" )
                     end
                 else
-                    save( args[1] )
+                    CommunityBans:Log( "File with ban list saved: garrysmod/data/", save( args[1] ) )
                 end
             end)
 
@@ -244,7 +244,9 @@ if (SERVER) then
             local function load( name )
                 local filename = (name or "community_bans") .. ".txt"
                 if file.Exists( filename, "DATA" ) then
-                    CommunityBans.List = {}
+                    if (CommunityBans.List == nil) then
+                        CommunityBans.List = {}
+                    end
 
                     local body = file.Read( filename, "DATA" )
                     if (body == nil) or (body == "") then
@@ -254,22 +256,20 @@ if (SERVER) then
 
                     for str in body:gmatch( "(.-)\n" ) do
                         local line = str:gsub( "\r", "" )
-                        local start = line:find( "STEAM_0:", 0 )
+                        local start = line:find( "STEAM_", 0 )
                         if (start == nil) then continue end
                         if (start == "") then continue end
 
                         CommunityBans.List[ util_SteamIDTo64( line:sub( start, #line ) ) ] = true
                     end
 
-                    CommunityBans:Log( "Parsing has been successfully completed!" )
-                    return "Parsing has been successfully completed!"
+                    return "Bans loaded has been successfully completed! File: " .. filename
                 else
-                    CommunityBans:Log( "Parsing ERROR: \n", "File not exists!" )
-                    return "Parsing ERROR: \n", "File not exists!"
+                    return "Parsing ERROR: \n", " File not exists!"
                 end
             end
 
-            concommand.Add("community_bans_load", function( ply )
+            concommand.Add("community_bans_load", function( ply, cmd, args )
                 if IsValid( ply ) then
                     if (ply:IsSuperAdmin() or ply:IsListenServerHost()) then
                         CommunityBans:Notify( ply, load( args[1] ) )
@@ -277,7 +277,35 @@ if (SERVER) then
                         CommunityBans:Notify( ply, "You do not have rights to perform this action!" )
                     end
                 else
-                    CommunityBans:Notify( ply, load( args[1] ) )
+                    CommunityBans:Log( load( args[1] ) )
+                end
+            end)
+
+            local function hasBan( steamid )
+                if isstring( steamid ) then
+                    if steamid:match( "STEAM_" ) then
+                        steamid = util.SteamIDTo64( steamid )
+                    end
+
+                    return CommunityBans.List[ steamid ] == true
+                end
+
+                return false
+            end
+
+            concommand.Add("community_bans_check", function( ply, cmd, args )
+                if IsValid( ply ) then
+                    if (ply:IsSuperAdmin() or ply:IsListenServerHost()) then
+                        for num, str in ipairs( args ) do
+                            CommunityBans:Notify( ply, string.format( "%s - %s", str, hasBan( str ) and "Yes" or "No" ) )
+                        end
+                    else
+                        CommunityBans:Notify( ply, "You do not have rights to perform this action!" )
+                    end
+                else
+                    for num, str in ipairs( args ) do
+                        CommunityBans:Log( string.format( "%s - %s", str, hasBan( str ) and "Yes" or "No" ) )
+                    end
                 end
             end)
 
