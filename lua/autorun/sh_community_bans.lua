@@ -23,8 +23,7 @@ MsgC( HSVToColor( math.random(360) % 360, 0.8, 0.8 ), [[
 CommunityBans.Title = "Community Ban List"
 CommunityBans.Colors = {
     ["Title"] = Color( 0, 103, 221 ),
-    ["Message"] = Color( 224, 182, 42 ),
-    ["Player"] = Color( 18, 184, 206 )
+    ["Message"] = Color( 224, 182, 42 )
 }
 
 CommunityBans.Reason = [[
@@ -51,11 +50,15 @@ CommunityBans.Title = "[" .. CommunityBans.Title .. "] "
 
 do
 
+    local MsgC = MsgC
     local unpack = unpack
     local table_Add = table.Add
 
     function CommunityBans:Log( ... )
-        MsgC( self.Colors.Title, self.Title, self.Colors.Message, unpack( table_Add( {...}, {"\n"} ) ) )
+        local args = {...}
+        timer.Simple(0, function()
+            MsgC( self.Colors.Title, self.Title, self.Colors.Message, unpack( table_Add( args, {"\n"} ) ) )
+        end)
     end
 
 end
