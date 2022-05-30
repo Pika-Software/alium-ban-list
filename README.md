@@ -1,4 +1,4 @@
-# TheAliumBans
+# Community Ban List
 Единая система банов для Garry's Mod, сообщества The Alium
 
 ## Установка
@@ -9,4 +9,12 @@
 ## Использование
 При запуске сервер сам получает информацию о банах и оставляет сообщение в консоли о успешности получения списка.
 
-`alium_bans_update` - команда в консоли для обновления списка банов на сервере.
+`community_bans_get` - обновления списка банов на сервере.
+
+`community_bans_load` - загрузка баннов из файла `data/community_bans.txt`.
+
+`community_bans_save` - сохранение баннов в файл `data/community_bans.txt`.
+
+`community_bans_clear` - очистка всех баннов на сервере.
+
+`community_bans_print` - вывод баннов в консоль сервера (Опасно).
