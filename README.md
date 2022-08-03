@@ -11,10 +11,10 @@
 
 `community_bans_get` - обновления списка банов на сервере.
 
-`community_bans_load` - загрузка баннов из файла `data/community_bans.txt`.
+`community_bans_load` - загрузка банов из файла `data/community_bans.txt`.
 
-`community_bans_save` - сохранение баннов в файл `data/community_bans.txt`.
+`community_bans_save` - сохранение банов в файл `data/community_bans.txt`.
 
-`community_bans_clear` - очистка всех баннов на сервере.
+`community_bans_clear` - очистка всех банов на сервере.
 
-`community_bans_print` - вывод баннов в консоль сервера (Опасно).
+`community_bans_print` - вывод банов в консоль сервера (Опасно).
