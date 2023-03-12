@@ -1,6 +1,6 @@
 Name = 'The Alium'
 Source = 'https://raw.githubusercontent.com/Pika-Software/gmod_alium_bans/main/banned_user.cfg'
-Reason = [[
+Message = [[
     Ваш SteamID не проходит по системе
     блокировок сателлитов или(и) вы имеете
     особое отношение к Персонам Нон Грата
